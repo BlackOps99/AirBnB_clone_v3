@@ -11,7 +11,6 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-import inspect
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -74,7 +73,7 @@ class FileStorage:
         """
             get the object based on class name and id
         """
-        if inspect.isclass(cls) and id:
+        if cls and id:
             createKey = "{}.{}".format(cls, id)
             get_all_obj = self.all(cls)
             return get_all_obj.get(createKey)
