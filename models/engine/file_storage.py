@@ -86,4 +86,4 @@ class FileStorage:
             if no cls passed
             else will return tha count of passed cls
         """
-        return (len(self.all(cls)))
+        return len(self.all(cls))
