@@ -86,4 +86,13 @@ class FileStorage:
             if no cls passed
             else will return tha count of passed cls
         """
-        return len(self.all(cls))
+        all_class = classes.values()
+
+        if not cls:
+            count = 0
+            for clas in all_class:
+                count += len(self.all(clas).values())
+        else:
+            count = len(self.all(cls).values())
+
+        return count

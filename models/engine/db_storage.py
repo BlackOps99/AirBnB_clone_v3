@@ -80,6 +80,9 @@ class DBStorage:
         """
             get the object based on class name and id
         """
+        if cls not in classes.values():
+            return None
+
         if inspect.isclass(cls) and id:
             createKey = "{}.{}".format(cls, id)
             get_all_obj = self.all(cls)
@@ -92,4 +95,13 @@ class DBStorage:
             if no cls passed
             else will return tha count of passed cls
         """
-        return len(self.all(cls))
+        all_class = classes.values()
+
+        if not cls:
+            count = 0
+            for clas in all_class:
+                count += len(models.storage.all(clas).values())
+        else:
+            count = len(models.storage.all(cls).values())
+
+        return count
